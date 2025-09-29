@@ -162,7 +162,48 @@ Explain which accounts were cracked and why.
 
 Describe how salt changes the hash and defends against rainbow tables.
 
-Suggest defensive measures: strong passwords, password managers, bcrypt/argon2, rate limiting, 2FA.
+# How salt changes the hash and defends against rainbow tables
+
+A salt is a random value added to a password before hashing. Instead of hashing just the password (e.g., hash("mypassword")), the system hashes hash("randomSalt" + "mypassword").
+
+This changes the output in two important ways:
+
+1. Uniqueness: Two users with the same password will have different hashes, because each salt is different.
+
+
+2. Rainbow table defense: A rainbow table is a large precomputed list of hashes for common passwords. Since the salt is random and unique per user, attackers would need to compute a new rainbow table for every possible salt — which is computationally infeasible.
+
+
+
+So, salting ensures that precomputed attacks become useless and forces attackers to brute force each password individually.
+
+
+---
+# Suggest defensive measures: strong passwords, password managers, bcrypt/argon2, rate limiting, 2FA.
+
+
+# Defensive measures
+
+1. Strong passwords: Encourage long, unpredictable passwords to increase brute-force difficulty.
+
+
+2. Password managers: Let users generate and store complex passwords without needing to remember them.
+
+
+3. Modern hashing algorithms: Use adaptive functions like bcrypt, scrypt, or Argon2. They are deliberately slow and memory-hard, making brute-force attacks more expensive.
+
+
+4. Rate limiting: Limit login attempts (e.g., 5 tries per minute per IP). This slows down online brute-force attacks.
+
+
+5. Two-Factor Authentication (2FA): Require an additional factor (like an OTP or authenticator app code). Even if a password is compromised, the account remains protected.
+
+
+
+
+---
+
+Put simply: Salt defeats rainbow tables, bcrypt/Argon2 defeats brute force, strong passwords defeat guessing, and 2FA defeats password theft.
 
 
 ## Ethics
